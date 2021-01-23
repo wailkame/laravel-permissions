@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Article;
-use Dotenv\Validator;
+use App\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ArticleController extends Controller
 {
@@ -28,7 +30,8 @@ class ArticleController extends Controller
     public function create()
     {
         //
-        return view('article.create');
+        $categories = Category::all();
+        return view('article.create',compact('categories'));
     }
 
     /**
@@ -40,16 +43,21 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         //
+        Article::create($request->all() + ['user_id'=> Auth::id()]);
+        return redirect()->route('article.index');
         
-        Validator::make($request->all(), [
-            'title' => 'required',
-            'description' => 'required',
-        ])->validate();
+        // Validator::make($request->all(), [
+        //     'title' => 'required',
+        //     'description' => 'required',
+        //     'user_id' => 'required'
+        // ])->validate();
 
-        $article = new Article;
-        $article->title = $request->title;
-        $article->full_text = $request->description;
-        $article->category_id = $request->category_id;
+        // $article = new Article;
+        // $article->title = $request->title;
+        // $article->full_text = $request->description;
+        // $article->category_id = $request->category_id;
+        // $article->save();
+        // return redirect('article.index')->with('status', 'Article Added');
     }
 
     /**
@@ -72,6 +80,8 @@ class ArticleController extends Controller
     public function edit(Article $article)
     {
         //
+        $categories = Category::all();
+        return view('article.edit', compact('article', 'categories'));
     }
 
     /**
@@ -84,6 +94,11 @@ class ArticleController extends Controller
     public function update(Request $request, Article $article)
     {
         //
+        $article->title = $request->title;
+        $article->description = $request->description;
+        $article->category_id = $request->category_id;
+        $article->save();
+        return redirect()->route('article.index');
     }
 
     /**

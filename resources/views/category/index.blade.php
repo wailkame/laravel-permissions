@@ -13,27 +13,27 @@
                 @endif
                 <div class="card-body">
                     
-                    <a href="{{ route('article.create')}}" class="btn btn-primary mb-4">Add Article</a>
+                    <a href="{{ route('category.create')}}" class="btn btn-primary mb-4">Add Category</a>
                     
                     <table class="table">
                         <thead>
                           <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">Text</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Created At</th>
                             <th scope="col">Action</th>
                           </tr>
                         </thead>
                         <tbody>
                           <?php $id = 0?>
-                          @foreach ($articles as $article)
+                          @foreach ($categories as $category)
                             <?php $id++ ?>
                             <tr>
                               <th scope="row"><?= $id?></th>
-                              <td>{{$article->title}}</td>
-                              <td class="d-inline-block  text-truncate" style="max-width: 150px;">{{$article->description}}</td>
+                              <td>{{$category->name}}</td>
+                              <td class="d-inline-block  text-truncate" style="max-width: 150px;">{{$category->created_at}}</td>
                               <td>
-                                  <a href="/article/{{$article->id}}/edit" class="btn btn-sm btn-primary mb-4">Edit</a>
+                                  <a href="/category/{{$category->id}}/edit" class="btn btn-sm btn-primary mb-4">Edit</a>
                                   <a href="#" class="btn btn-sm btn-danger mb-4">Delete</a>
                               </td>
                             </tr> 
