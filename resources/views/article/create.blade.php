@@ -18,13 +18,20 @@
                           <label for="description">Description</label>
                           <textarea type="text" class="form-control" name="description" id="description" placeholder="Description"></textarea>
                         </div>
-                        <select class="custom-select mb-4 d-block" style="width: 10rem;" name="category_id">
+                        <select class="custom-select  d-block" style="width: 10rem;" name="category_id">
                             <option value="">Choose Category</option>
                             @foreach ($categories as $category)
                                 <option value="{{$category->id}}">{{$category->name}}</option>
                             @endforeach
-                            
                         </select>
+                        <br/>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="1" id="defaultCheck1" name="published">
+                            <label class="form-check-label" for="defaultCheck1">
+                              Published
+                            </label>
+                        </div>
+                        <br/>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                    

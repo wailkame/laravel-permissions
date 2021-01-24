@@ -20,7 +20,11 @@
                           <tr>
                             <th scope="col">#</th>
                             <th scope="col">Title</th>
-                            <th scope="col">Text</th>
+                            
+                            @if (Auth::user()->is_admin)
+                            <th scope="col">User</th>
+                            @endif
+                            <th scope="col">Published At</th>
                             <th scope="col">Action</th>
                           </tr>
                         </thead>
@@ -31,7 +35,11 @@
                             <tr>
                               <th scope="row"><?= $id?></th>
                               <td>{{$article->title}}</td>
-                              <td class="d-inline-block  text-truncate" style="max-width: 150px;">{{$article->description}}</td>
+                              @if (Auth::user()->is_admin)
+                              <td>{{$article->user->name}}</td>  
+                              @endif
+                              <td>{{$article->published_at}}</td>                     
+                              {{-- <td class="d-inline-block  text-truncate" style="max-width: 150px;">{{$article->description}}</td> --}}
                               <td>
                                   <a href="/article/{{$article->id}}/edit" class="btn btn-sm btn-primary mb-4">Edit</a>
                                   <a href="#" class="btn btn-sm btn-danger mb-4">Delete</a>

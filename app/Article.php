@@ -10,15 +10,19 @@ use PDO;
 class Article extends Model
 {
     //
-    protected $fillable = ['title', 'description', 'category_id','user_id'];
+    protected $fillable = ['title', 'description', 'category_id','user_id','published_at'];
     
     protected static function booted()
     {
-        if(Auth::check()){
+        if(Auth::check() && !Auth::user()->is_admin){
             static::addGlobalScope('user', function (Builder $builder) {
                 $builder->where('user_id', Auth::id());
             });
         }
         
+    }
+
+    public function user(){
+        return $this->belongsTo('App\User');
     }
 }

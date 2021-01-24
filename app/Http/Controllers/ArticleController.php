@@ -18,7 +18,7 @@ class ArticleController extends Controller
     public function index()
     {
         //
-        $articles  = Article::all();
+        $articles  = Article::with('user')->get();
         return view('article.index', compact('articles'));
     }
 
@@ -43,7 +43,10 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         //
-        Article::create($request->all() + ['user_id'=> Auth::id()]);
+        Article::create($request->all() + [
+        'user_id'=> Auth::id(),
+        'published_at' => $request->input('published') ? now() :null
+        ]);
         return redirect()->route('article.index');
         
         // Validator::make($request->all(), [
@@ -94,10 +97,8 @@ class ArticleController extends Controller
     public function update(Request $request, Article $article)
     {
         //
-        $article->title = $request->title;
-        $article->description = $request->description;
-        $article->category_id = $request->category_id;
-        $article->save();
+        $data = $request->all();
+        $article->update($data);
         return redirect()->route('article.index');
     }
 
