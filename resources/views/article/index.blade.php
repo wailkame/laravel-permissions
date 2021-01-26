@@ -21,7 +21,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Title</th>
                             
-                            @if (Auth::user()->is_admin)
+                            @if (Auth::user()->role_id == 2)
                             <th scope="col">User</th>
                             @endif
                             <th scope="col">Published At</th>
@@ -35,7 +35,7 @@
                             <tr>
                               <th scope="row"><?= $id?></th>
                               <td>{{$article->title}}</td>
-                              @if (Auth::user()->is_admin)
+                              @if (Auth::user()->role_id == 2)
                               <td>{{$article->user->name}}</td>  
                               @endif
                               <td>{{$article->published_at}}</td>                     

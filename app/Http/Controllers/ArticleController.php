@@ -18,6 +18,7 @@ class ArticleController extends Controller
     public function index()
     {
         //
+        
         $articles  = Article::with('user')->get();
         return view('article.index', compact('articles'));
     }
@@ -45,7 +46,7 @@ class ArticleController extends Controller
         //
         Article::create($request->all() + [
         'user_id'=> Auth::id(),
-        'published_at' => $request->input('published') ? now() :null
+        'published_at' => Auth::user()->role_id == 2 || Auth::user()->role_id == 3 && $request->input('published') ? now() :null
         ]);
         return redirect()->route('article.index');
         
@@ -98,6 +99,9 @@ class ArticleController extends Controller
     {
         //
         $data = $request->all();
+        if(Auth::user()->role_id == 2 || Auth::user()->role_id == 3){
+            $data['published_at'] = $request->input('published') ? now(): null;
+        }
         $article->update($data);
         return redirect()->route('article.index');
     }

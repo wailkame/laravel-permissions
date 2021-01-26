@@ -14,7 +14,9 @@ class Article extends Model
     
     protected static function booted()
     {
-        if(Auth::check() && !Auth::user()->is_admin){
+        // shows only user its articles 
+
+        if(Auth::check() && Auth::user()->role_id != 2  && Auth::user()->role_id != 3){
             static::addGlobalScope('user', function (Builder $builder) {
                 $builder->where('user_id', Auth::id());
             });

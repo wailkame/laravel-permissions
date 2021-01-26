@@ -25,6 +25,7 @@
                             @endforeach
                         </select>
                         <br/>
+                        @if (Auth::user()->role_id == 2 || Auth::user()->role_id == 3)
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" value="1" id="defaultCheck1" name="published">
                             <label class="form-check-label" for="defaultCheck1">
@@ -32,6 +33,9 @@
                             </label>
                         </div>
                         <br/>
+                        @endif
+                        
+                        
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                    

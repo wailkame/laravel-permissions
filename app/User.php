@@ -16,8 +16,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','is_admin','role_id'
+        'name', 'email', 'password','role_id'
     ];
+
 
     /**
      * The attributes that should be hidden for arrays.
@@ -36,4 +37,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getIsAdminAttribut(){
+        return $this->role_id == 2;
+    }
+
+    public function getIsPublisherAttribut(){
+        return $this->role_id == 3;
+    }
+    protected $guarded = [];
+    
+    public function article(){
+        return $this->hasMany('App\Article');
+    }
 }

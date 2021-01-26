@@ -43,7 +43,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('article.index') }}">{{ __('Articles') }}</a>
                             </li>
-                            @if (Auth::user()->is_admin)
+                            @if (Auth::user()->role_id == 2)
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('category.index') }}">{{ __('Catagories') }}</a>
                             </li>

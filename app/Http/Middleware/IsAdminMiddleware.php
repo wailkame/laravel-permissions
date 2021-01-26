@@ -16,7 +16,7 @@ class IsAdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if(!Auth::user()->is_admin){
+        if(Auth::user()->role_id != 2){
             abort(403);
         }
         return $next($request);

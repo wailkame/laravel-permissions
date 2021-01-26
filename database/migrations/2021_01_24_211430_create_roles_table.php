@@ -15,12 +15,12 @@ class CreateRolesTable extends Migration
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->text('name');
+            $table->string('name');
             $table->timestamps();
         });
         $roles = ['User', 'Administrator', 'Publisher'];
         foreach($roles as $role){
-            \App\User::create(['name' => $role]);
+            \App\Role::create(['name' => $role]);
         }
     }
 

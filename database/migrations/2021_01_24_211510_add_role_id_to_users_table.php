@@ -19,11 +19,11 @@ class AddRoleIdToUsersTable extends Migration
             $table->foreign('role_id')->references('id')->on('roles');
         });
         // update role_id where is_admin is equal to 1
-        \App\User::where('is_admin',1)->update(['role_id' => 2]);
+        // \App\User::where('is_admin',1)->update(['role_id' => 2]);
         // remove the is_admin column
-        Schema::table('users', function (Blueprint $table){
-            $table->removeColumn('is_admin');
-        });
+        // Schema::table('users', function (Blueprint $table){
+        //     $table->dropColumn('is_admin');
+        // });
     }
 
     /**
