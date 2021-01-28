@@ -6,7 +6,9 @@ use App\Article;
 use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
+
 
 class ArticleController extends Controller
 {
@@ -44,10 +46,13 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         //
-        Article::create($request->all() + [
-        'user_id'=> Auth::id(),
-        'published_at' => Auth::user()->role_id == 2 || Auth::user()->role_id == 3 && $request->input('published') ? now() :null
-        ]);
+        $data = $request->all();
+        $data['user_id'] = Auth::id();//$request->user_id;
+        if(Gate::allows('publish-articles')){
+            $data['published_at'] = $request->input('published') ? now(): Null;
+        }
+
+        Article::create($data);
         return redirect()->route('article.index');
         
         // Validator::make($request->all(), [
@@ -99,7 +104,7 @@ class ArticleController extends Controller
     {
         //
         $data = $request->all();
-        if(Auth::user()->role_id == 2 || Auth::user()->role_id == 3){
+        if(Gate::allows('publish-articles')){
             $data['published_at'] = $request->input('published') ? now(): null;
         }
         $article->update($data);

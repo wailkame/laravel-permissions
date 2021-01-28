@@ -38,14 +38,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function getIsAdminAttribut(){
-        return $this->role_id == 2;
-    }
+    // public function getIsAdminAttribut(){
+    //     return $this->role_id == 2;
+    // }
 
-    public function getIsPublisherAttribut(){
-        return $this->role_id == 3;
-    }
-    protected $guarded = [];
+    // public function getIsPublisherAttribut(){
+    //     return $this->role_id == 3;
+    // }
+    //protected $guarded = [];
     
     public function article(){
         return $this->hasMany('App\Article');

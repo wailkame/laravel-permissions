@@ -43,11 +43,11 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('article.index') }}">{{ __('Articles') }}</a>
                             </li>
-                            @if (Auth::user()->role_id == 2)
+                            @can('manage-category')
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('category.index') }}">{{ __('Catagories') }}</a>
                             </li>
-                            @endif
+                            @endcan
                             
                             <li class="nav-item dropdown">
                                 

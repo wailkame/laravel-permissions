@@ -21,9 +21,9 @@
                             <th scope="col">#</th>
                             <th scope="col">Title</th>
                             
-                            @if (Auth::user()->role_id == 2)
+                            @can('see-article-user')
                             <th scope="col">User</th>
-                            @endif
+                            @endcan
                             <th scope="col">Published At</th>
                             <th scope="col">Action</th>
                           </tr>
@@ -35,9 +35,9 @@
                             <tr>
                               <th scope="row"><?= $id?></th>
                               <td>{{$article->title}}</td>
-                              @if (Auth::user()->role_id == 2)
+                              @can('see-article-user')
                               <td>{{$article->user->name}}</td>  
-                              @endif
+                              @endcan
                               <td>{{$article->published_at}}</td>                     
                               {{-- <td class="d-inline-block  text-truncate" style="max-width: 150px;">{{$article->description}}</td> --}}
                               <td>
