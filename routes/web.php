@@ -24,7 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth' ], function(){
     Route::resource('article', 'ArticleController');
-
+    Route::view('invite', 'invite')->name('invite');
     // administrator Routes
     Route::group(['middleware'=>'is_admin'] , function(){
         Route::resource('category', 'CategoryController');

@@ -18,7 +18,8 @@ class Article extends Model
 
         if(Auth::check() && Auth::user()->role_id != 2  && Auth::user()->role_id != 3){
             static::addGlobalScope('user', function (Builder $builder) {
-              //  $builder->where('user_id', Auth::id());
+                $organization_id = Auth::user()->organization_id ? Auth::user()->organization_id: Auth::id();
+                $builder->where('user_id', $organization_id);
             });
         }
         
