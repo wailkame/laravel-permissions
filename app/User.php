@@ -38,15 +38,33 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // public function getIsAdminAttribut(){
-    //     return $this->role_id == 2;
-    // }
+    public function getIsAdminAttribute(){
+        return $this->role_id == 2;
+    }
 
-    // public function getIsPublisherAttribut(){
-    //     return $this->role_id == 3;
-    // }
-    //protected $guarded = [];
+    public function getIsPublisherAttribute(){
+        return $this->role_id == 3;
+    }
+
+    public function getOrganizationIdAttribute(){
+        if(session('organization_id')){
+            return session('organization_id');
+        }
+
+        $organization = $this->organizations()->first();
+        if($organization){
+            session(['organization_id' => $organization->id, 'organization_name' => $organization->name]);
+            return $organization->id;
+        }
+        return Null;
+    }
     
+    public function organizations(){
+        return $this->belongsToMany('App\User', 'user_organization', 'user_id', 'organization_id');
+    }
+
+
+
     public function article(){
         return $this->hasMany('App\Article');
     }

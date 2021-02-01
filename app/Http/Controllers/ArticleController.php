@@ -46,8 +46,9 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         //
+        $organization_id = Auth::user()->organization_id ? Auth::user()->organization_id: Auth::id();
         $data = $request->all();
-        $data['user_id'] = Auth::id();//$request->user_id;
+        $data['user_id'] = $organization_id; //$request->user_id;
         if(Gate::allows('publish-articles')){
             $data['published_at'] = $request->input('published') ? now(): Null;
         }

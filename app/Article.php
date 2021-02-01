@@ -16,7 +16,7 @@ class Article extends Model
     {
         // shows only user its articles 
 
-        if(Auth::check() && Auth::user()->role_id != 2  && Auth::user()->role_id != 3){
+        if(Auth::check() && Auth::user()->is_admin  && Auth::user()->is_publisher){
             static::addGlobalScope('user', function (Builder $builder) {
                 $organization_id = Auth::user()->organization_id ? Auth::user()->organization_id: Auth::id();
                 $builder->where('user_id', $organization_id);
