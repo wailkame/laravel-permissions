@@ -52,7 +52,7 @@ class ArticleController extends Controller
         if(Gate::allows('publish-articles')){
             $data['published_at'] = $request->input('published') ? now(): Null;
         }
-
+        
         Article::create($data);
         return redirect()->route('article.index');
         

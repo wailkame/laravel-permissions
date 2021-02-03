@@ -15,8 +15,8 @@ class Article extends Model
     protected static function booted()
     {
         // shows only user its articles 
-
-        if(Auth::check() && Auth::user()->is_admin  && Auth::user()->is_publisher){
+        //dd(Auth::user()->organization_id);
+        if(Auth::check() && !Auth::user()->is_admin  && !Auth::user()->is_publisher){
             static::addGlobalScope('user', function (Builder $builder) {
                 $organization_id = Auth::user()->organization_id ? Auth::user()->organization_id: Auth::id();
                 $builder->where('user_id', $organization_id);

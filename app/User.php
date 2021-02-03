@@ -46,6 +46,12 @@ class User extends Authenticatable
         return $this->role_id == 3;
     }
 
+    
+    
+    public function organizations(){
+        return $this->belongsToMany('App\User', 'user_organization', 'user_id', 'organization_id');
+    }
+
     public function getOrganizationIdAttribute(){
         if(session('organization_id')){
             return session('organization_id');
@@ -58,12 +64,6 @@ class User extends Authenticatable
         }
         return Null;
     }
-    
-    public function organizations(){
-        return $this->belongsToMany('App\User', 'user_organization', 'user_id', 'organization_id');
-    }
-
-
 
     public function article(){
         return $this->hasMany('App\Article');
