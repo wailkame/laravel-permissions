@@ -21,6 +21,7 @@ class ArticleController extends Controller
     {
         //
         
+        
         $articles  = Article::with('user')->get();
         return view('article.index', compact('articles'));
     }

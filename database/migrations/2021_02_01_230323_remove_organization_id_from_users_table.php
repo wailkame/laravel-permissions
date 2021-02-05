@@ -13,11 +13,11 @@ class RemoveOrganizationIdFromUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-            $table->dropForeign(['organization_id']);
-            $table->dropColumn('organization_id');
-        });
+        // Schema::table('users', function (Blueprint $table) {
+        //     //
+        //     $table->dropForeign(['organization_id']);
+        //     $table->dropColumn('organization_id');
+        // });
     }
 
     /**

@@ -46,10 +46,16 @@ class User extends Authenticatable
         return $this->role_id == 3;
     }
 
-    
+    public function getRoleIdAttribute(){
+        if(session('organization_role_id')){
+            return session('organization_role_id');
+        }
+
+        return $this->attributes['role_id'];
+    }
     
     public function organizations(){
-        return $this->belongsToMany('App\User', 'user_organization', 'user_id', 'organization_id');
+        return $this->belongsToMany('App\User', 'user_organization', 'user_id', 'organization_id')->withPivot(['role_id']);
     }
 
     public function getOrganizationIdAttribute(){

@@ -40,7 +40,7 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @auth
-                            @if (Auth::user()->organizations()->count() > 1)
+                            @if (Auth::user()->organizations()->count() > 0)
                                 <li class="nav-item dropdown">
                                     
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -48,7 +48,9 @@
                                     </a>
                                     
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                        @foreach (Auth::user()->organizations as $organization)
+                                        
+                                        @foreach(Auth::user()->organizations as $organization)
+                                                
                                             <a class="dropdown-item" href="{{route('organization', $organization->id)}}">
                                                 {{$organization->name}}
                                             </a>
@@ -56,6 +58,7 @@
                                         
                                     </div>
                                 </li>
+                            
                             @endif
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('invite') }}">{{ __('Invite') }}</a>

@@ -13,6 +13,12 @@
                         <input type="hidden" name="organization_id" value="{{$organization->id}}">
                         Do you want to join the organization <b>{{$organization->name}}</b>
                         <br>
+                        Join As:
+                        <select name="role_id" class="form-control">
+                            <option value="1">Simple user</option>
+                            <option value="3">Publisher</option>
+                        </select>
+                        <br>
                         <input type="submit" class="btn btn-primary" value="Yes, Join">
                     </form>
                 </div>
